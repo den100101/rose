@@ -1,0 +1,968 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Blooming Rose</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+
+        background: radial-gradient(
+          circle at 50% 35%,
+          #520044 0%,
+          #22001f 35%,
+          #08000c 100%
+        );
+
+        font-family: Arial, sans-serif;
+      }
+
+      /* =========================
+           MOON
+        ========================= */
+
+      .moon {
+        position: absolute;
+
+        width: 110px;
+        height: 110px;
+
+        top: 60px;
+        right: 12%;
+
+        border-radius: 50%;
+
+        background: #fff3ce;
+
+        box-shadow:
+          0 0 20px #fff3ce,
+          0 0 70px rgba(255, 243, 206, 0.5);
+
+        animation: moonGlow 3s ease-in-out infinite alternate;
+      }
+
+      @keyframes moonGlow {
+        from {
+          box-shadow:
+            0 0 20px #fff3ce,
+            0 0 50px rgba(255, 243, 206, 0.3);
+        }
+
+        to {
+          box-shadow:
+            0 0 30px #fff3ce,
+            0 0 90px rgba(255, 243, 206, 0.6);
+        }
+      }
+
+      /* =========================
+           STARS
+        ========================= */
+
+      .stars {
+        position: absolute;
+
+        width: 100%;
+        height: 100%;
+      }
+
+      .star {
+        position: absolute;
+
+        width: 3px;
+        height: 3px;
+
+        border-radius: 50%;
+
+        background: white;
+
+        animation: twinkle 2s ease-in-out infinite alternate;
+      }
+
+      .star:nth-child(1) {
+        top: 10%;
+        left: 10%;
+      }
+
+      .star:nth-child(2) {
+        top: 20%;
+        left: 25%;
+        animation-delay: 0.5s;
+      }
+
+      .star:nth-child(3) {
+        top: 13%;
+        left: 45%;
+        animation-delay: 1s;
+      }
+
+      .star:nth-child(4) {
+        top: 30%;
+        left: 70%;
+        animation-delay: 0.3s;
+      }
+
+      .star:nth-child(5) {
+        top: 15%;
+        left: 85%;
+        animation-delay: 0.8s;
+      }
+
+      .star:nth-child(6) {
+        top: 40%;
+        left: 15%;
+        animation-delay: 1.2s;
+      }
+
+      .star:nth-child(7) {
+        top: 35%;
+        left: 90%;
+        animation-delay: 0.7s;
+      }
+
+      .star:nth-child(8) {
+        top: 45%;
+        left: 55%;
+        animation-delay: 1.5s;
+      }
+
+      @keyframes twinkle {
+        from {
+          opacity: 0.2;
+          transform: scale(0.5);
+        }
+
+        to {
+          opacity: 1;
+          transform: scale(1.5);
+        }
+      }
+
+      /* =========================
+           FIRE FLIES
+        ========================= */
+
+      .firefly {
+        position: absolute;
+
+        width: 5px;
+        height: 5px;
+
+        border-radius: 50%;
+
+        background: #fff59d;
+
+        box-shadow:
+          0 0 10px #fff59d,
+          0 0 20px #fff59d;
+
+        animation: fly 6s ease-in-out infinite;
+      }
+
+      .firefly:nth-child(1) {
+        left: 20%;
+        bottom: 25%;
+        animation-delay: 1s;
+      }
+
+      .firefly:nth-child(2) {
+        left: 75%;
+        bottom: 35%;
+        animation-delay: 3s;
+      }
+
+      .firefly:nth-child(3) {
+        left: 30%;
+        bottom: 45%;
+        animation-delay: 2s;
+      }
+
+      @keyframes fly {
+        0% {
+          opacity: 0;
+          transform: translate(0, 0);
+        }
+
+        25% {
+          opacity: 1;
+        }
+
+        50% {
+          transform: translate(40px, -50px);
+        }
+
+        75% {
+          opacity: 0.5;
+          transform: translate(-30px, -90px);
+        }
+
+        100% {
+          opacity: 0;
+          transform: translate(20px, -130px);
+        }
+      }
+
+      /* =========================
+           GROUND
+        ========================= */
+
+      .ground {
+        position: absolute;
+
+        bottom: 0;
+        left: 0;
+
+        width: 100%;
+        height: 100px;
+
+        background: linear-gradient(to top, #020202, #100014);
+      }
+
+      /* =========================
+           ROSE
+        ========================= */
+
+      .rose {
+        position: relative;
+
+        width: 300px;
+        height: 620px;
+
+        z-index: 10;
+
+        transform-origin: bottom center;
+
+        animation:
+          roseAppear 3s ease-out forwards,
+          sway 5s ease-in-out 3s infinite;
+      }
+
+      @keyframes roseAppear {
+        0% {
+          opacity: 0;
+
+          transform: translateY(350px) scale(0.05);
+        }
+
+        70% {
+          opacity: 1;
+        }
+
+        100% {
+          opacity: 1;
+
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      /* =========================
+           STEM
+        ========================= */
+
+      .stem {
+        position: absolute;
+
+        width: 14px;
+        height: 370px;
+
+        left: 143px;
+        bottom: 30px;
+
+        border-radius: 20px;
+
+        background: linear-gradient(to right, #043d15, #16a238, #064c19);
+
+        transform-origin: bottom;
+
+        animation: stemGrow 3s ease-out forwards;
+      }
+
+      @keyframes stemGrow {
+        from {
+          transform: scaleY(0);
+        }
+
+        to {
+          transform: scaleY(1);
+        }
+      }
+
+      /* =========================
+           THORNS
+        ========================= */
+
+      .thorn {
+        position: absolute;
+
+        width: 0;
+        height: 0;
+
+        border-top: 5px solid transparent;
+        border-bottom: 5px solid transparent;
+
+        border-right: 15px solid #087224;
+
+        left: 131px;
+      }
+
+      .thorn.one {
+        bottom: 150px;
+      }
+
+      .thorn.two {
+        bottom: 210px;
+        transform: rotate(180deg);
+        left: 154px;
+      }
+
+      .thorn.three {
+        bottom: 270px;
+      }
+
+      /* =========================
+           LEAVES
+        ========================= */
+
+      .leaf {
+        position: absolute;
+
+        width: 105px;
+        height: 48px;
+
+        background: linear-gradient(135deg, #064e19, #19a83b);
+
+        border-radius: 100% 0 100% 0;
+
+        opacity: 0;
+
+        transform-origin: right center;
+      }
+
+      .leaf.left {
+        left: 38px;
+        bottom: 220px;
+
+        transform: rotate(-30deg);
+
+        animation: leafGrow 1s ease-out 2s forwards;
+      }
+
+      .leaf.right {
+        right: 38px;
+        bottom: 170px;
+
+        transform: scaleX(-1) rotate(-30deg);
+
+        animation: leafGrow 1s ease-out 2.3s forwards;
+      }
+
+      @keyframes leafGrow {
+        from {
+          opacity: 0;
+
+          transform: scale(0) rotate(-30deg);
+        }
+
+        to {
+          opacity: 1;
+        }
+      }
+
+      /* =========================
+           FLOWER
+        ========================= */
+
+      .flower {
+        position: absolute;
+
+        width: 240px;
+        height: 240px;
+
+        left: 30px;
+        top: 30px;
+
+        transform-origin: center;
+
+        animation: flowerGrow 3s ease-out 2.5s forwards;
+      }
+
+      @keyframes flowerGrow {
+        0% {
+          transform: scale(0) rotate(-20deg);
+        }
+
+        40% {
+          transform: scale(0.4) rotate(10deg);
+        }
+
+        70% {
+          transform: scale(1.1) rotate(-5deg);
+        }
+
+        100% {
+          transform: scale(1) rotate(0);
+        }
+      }
+
+      /* =========================
+           PETALS
+        ========================= */
+
+      .petal {
+        position: absolute;
+
+        width: 100px;
+        height: 140px;
+
+        left: 70px;
+        top: 45px;
+
+        border-radius: 70% 30% 70% 30%;
+
+        background: radial-gradient(
+          circle at 30% 20%,
+          #ff7188,
+          #e0003b 55%,
+          #680018
+        );
+
+        box-shadow:
+          inset -10px -15px 20px rgba(70, 0, 20, 0.5),
+          0 5px 15px rgba(0, 0, 0, 0.3);
+
+        transform-origin: bottom center;
+
+        opacity: 0;
+      }
+
+      /* Petal animations */
+
+      .petal:nth-child(1) {
+        animation: petalBloom 1s ease-out 3s forwards;
+
+        --angle: 0deg;
+      }
+
+      .petal:nth-child(2) {
+        animation: petalBloom 1s ease-out 3.25s forwards;
+
+        --angle: 45deg;
+      }
+
+      .petal:nth-child(3) {
+        animation: petalBloom 1s ease-out 3.5s forwards;
+
+        --angle: 90deg;
+      }
+
+      .petal:nth-child(4) {
+        animation: petalBloom 1s ease-out 3.75s forwards;
+
+        --angle: 135deg;
+      }
+
+      .petal:nth-child(5) {
+        animation: petalBloom 1s ease-out 4s forwards;
+
+        --angle: 180deg;
+      }
+
+      .petal:nth-child(6) {
+        animation: petalBloom 1s ease-out 4.25s forwards;
+
+        --angle: 225deg;
+      }
+
+      .petal:nth-child(7) {
+        animation: petalBloom 1s ease-out 4.5s forwards;
+
+        --angle: 270deg;
+      }
+
+      .petal:nth-child(8) {
+        animation: petalBloom 1s ease-out 4.75s forwards;
+
+        --angle: 315deg;
+      }
+
+      @keyframes petalBloom {
+        0% {
+          opacity: 0;
+
+          transform: rotate(var(--angle)) scale(0.05) translateY(0);
+        }
+
+        60% {
+          opacity: 1;
+        }
+
+        100% {
+          opacity: 1;
+
+          transform: rotate(var(--angle)) scale(1) translateY(-35px);
+        }
+      }
+
+      /* =========================
+           INNER PETALS
+        ========================= */
+
+      .inner {
+        position: absolute;
+
+        width: 80px;
+        height: 110px;
+
+        left: 80px;
+        top: 70px;
+
+        border-radius: 70% 30% 70% 30%;
+
+        background: linear-gradient(135deg, #ff5670, #b50030);
+
+        transform-origin: bottom center;
+
+        opacity: 0;
+      }
+
+      .inner:nth-child(9) {
+        --angle: 30deg;
+
+        animation: innerBloom 0.8s ease-out 5s forwards;
+      }
+
+      .inner:nth-child(10) {
+        --angle: 150deg;
+
+        animation: innerBloom 0.8s ease-out 5.2s forwards;
+      }
+
+      .inner:nth-child(11) {
+        --angle: 270deg;
+
+        animation: innerBloom 0.8s ease-out 5.4s forwards;
+      }
+
+      @keyframes innerBloom {
+        from {
+          opacity: 0;
+
+          transform: rotate(var(--angle)) scale(0.05);
+        }
+
+        to {
+          opacity: 1;
+
+          transform: rotate(var(--angle)) scale(1);
+        }
+      }
+
+      /* =========================
+           ROSE CENTER
+        ========================= */
+
+      .center {
+        position: absolute;
+
+        width: 55px;
+        height: 55px;
+
+        left: 92px;
+        top: 95px;
+
+        border-radius: 50%;
+
+        background: radial-gradient(circle, #ffc400, #d06b00 45%, #4b1100);
+
+        box-shadow: 0 0 20px rgba(255, 170, 0, 0.6);
+
+        opacity: 0;
+
+        animation: centerAppear 1s ease-out 5.7s forwards;
+      }
+
+      @keyframes centerAppear {
+        from {
+          opacity: 0;
+
+          transform: scale(0) rotate(180deg);
+        }
+
+        to {
+          opacity: 1;
+
+          transform: scale(1) rotate(0);
+        }
+      }
+
+      /* =========================
+           GENTLE ROSE MOVEMENT
+        ========================= */
+
+      @keyframes sway {
+        0% {
+          transform: rotate(-2deg);
+        }
+
+        25% {
+          transform: rotate(3deg);
+        }
+
+        50% {
+          transform: rotate(-3deg);
+        }
+
+        75% {
+          transform: rotate(2deg);
+        }
+
+        100% {
+          transform: rotate(-2deg);
+        }
+      }
+
+      /* =========================
+           BUTTON
+        ========================= */
+
+      .bloom-button {
+        position: absolute;
+
+        top: 25px;
+        left: 50%;
+
+        transform: translateX(-50%);
+
+        padding: 12px 25px;
+
+        border: 1px solid rgba(255, 255, 255, 0.3);
+
+        border-radius: 30px;
+
+        background: rgba(255, 255, 255, 0.08);
+
+        color: white;
+
+        font-size: 15px;
+
+        cursor: pointer;
+
+        backdrop-filter: blur(10px);
+
+        z-index: 20;
+
+        transition: 0.3s;
+      }
+
+      .bloom-button:hover {
+        background: rgba(255, 255, 255, 0.2);
+
+        transform: translateX(-50%) scale(1.05);
+      }
+
+      /* =========================
+           FALLING PETALS
+        ========================= */
+
+      .falling-petal {
+        position: absolute;
+
+        width: 15px;
+        height: 25px;
+
+        border-radius: 100% 0 100% 0;
+
+        background: #e0003b;
+
+        top: -30px;
+
+        opacity: 0.8;
+
+        animation: fall linear infinite;
+      }
+
+      .falling-petal:nth-child(1) {
+        left: 10%;
+
+        animation-duration: 7s;
+      }
+
+      .falling-petal:nth-child(2) {
+        left: 35%;
+
+        animation-duration: 9s;
+
+        animation-delay: 2s;
+      }
+
+      .falling-petal:nth-child(3) {
+        left: 60%;
+
+        animation-duration: 8s;
+
+        animation-delay: 4s;
+      }
+
+      .falling-petal:nth-child(4) {
+        left: 85%;
+
+        animation-duration: 10s;
+
+        animation-delay: 1s;
+      }
+
+      @keyframes fall {
+        0% {
+          top: -30px;
+
+          transform: rotate(0deg) translateX(0);
+
+          opacity: 0;
+        }
+
+        10% {
+          opacity: 0.8;
+        }
+
+        50% {
+          transform: rotate(180deg) translateX(80px);
+        }
+
+        100% {
+          top: 100vh;
+
+          transform: rotate(360deg) translateX(-80px);
+
+          opacity: 0;
+        }
+      }
+
+      /* =========================
+           MOBILE
+        ========================= */
+
+      @media (max-width: 600px) {
+        .moon {
+          width: 75px;
+          height: 75px;
+
+          top: 80px;
+          right: 10%;
+        }
+
+        .rose {
+          transform: scale(0.75);
+
+          transform-origin: bottom center;
+        }
+      }
+
+      .rose-message {
+        position: absolute;
+        top: 120px;
+        left: 50%;
+        transform: translateX(-50%);
+
+        color: white;
+        font-family: Georgia, serif;
+        font-size: 42px;
+        font-weight: normal;
+        text-align: center;
+
+        text-shadow:
+          0 0 10px rgba(255, 100, 150, 0.8),
+          0 0 25px rgba(255, 50, 100, 0.5);
+
+        z-index: 20;
+
+        animation: messageAppear 2s ease-out 5.5s both;
+      }
+
+      @keyframes messageAppear {
+        from {
+          opacity: 0;
+          transform: translateX(-50%) translateY(-20px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateX(-50%) translateY(0);
+        }
+      }
+
+      @media (max-width: 600px) {
+        .rose-message {
+          top: 120px;
+          width: 90%;
+          font-size: 28px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- =========================
+         BACKGROUND
+    ========================= -->
+    <h1 class="rose-message">Hello baby hope you like it po!</h1>
+
+    <div class="stars">
+      <div class="star"></div>
+      <div class="star"></div>
+      <div class="star"></div>
+      <div class="star"></div>
+      <div class="star"></div>
+      <div class="star"></div>
+      <div class="star"></div>
+      <div class="star"></div>
+    </div>
+
+    <div class="moon"></div>
+
+    <!-- Fireflies -->
+
+    <div class="firefly"></div>
+    <div class="firefly"></div>
+    <div class="firefly"></div>
+
+    <!-- Falling petals -->
+
+    <div class="falling-petal"></div>
+    <div class="falling-petal"></div>
+    <div class="falling-petal"></div>
+    <div class="falling-petal"></div>
+
+    <!-- Ground -->
+
+    <div class="ground"></div>
+
+    <!-- =========================
+         BUTTON
+    ========================= -->
+
+    <button class="bloom-button" onclick="restartBloom()">
+      🌹 Bloom Again
+    </button>
+
+    <!-- =========================
+         ROSE
+    ========================= -->
+
+    <div class="rose" id="rose">
+      <!-- Stem -->
+
+      <div class="stem"></div>
+
+      <!-- Thorns -->
+
+      <div class="thorn one"></div>
+      <div class="thorn two"></div>
+      <div class="thorn three"></div>
+
+      <!-- Leaves -->
+
+      <div class="leaf left"></div>
+
+      <div class="leaf right"></div>
+
+      <!-- Flower -->
+
+      <div class="flower">
+        <!-- Outer petals -->
+
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+
+        <!-- Inner petals -->
+
+        <div class="inner"></div>
+        <div class="inner"></div>
+        <div class="inner"></div>
+
+        <!-- Center -->
+
+        <div class="center"></div>
+      </div>
+    </div>
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
+
+    <script>
+      function restartBloom() {
+        const rose = document.getElementById("rose");
+
+        /*
+         * Clone the entire rose.
+         * This resets every CSS animation.
+         */
+
+        const newRose = rose.cloneNode(true);
+
+        /*
+         * Replace old rose
+         * with the new one.
+         */
+
+        rose.parentNode.replaceChild(newRose, rose);
+      }
+
+      /*
+       * Automatically create
+       * additional floating petals.
+       */
+
+      function createPetal() {
+        const petal = document.createElement("div");
+
+        petal.className = "falling-petal";
+
+        petal.style.left = Math.random() * 100 + "%";
+
+        petal.style.animationDuration = 6 + Math.random() * 6 + "s";
+
+        petal.style.animationDelay = Math.random() * 5 + "s";
+
+        document.body.appendChild(petal);
+
+        /*
+         * Remove the petal after
+         * the animation finishes.
+         */
+
+        setTimeout(() => {
+          petal.remove();
+        }, 13000);
+      }
+
+      /*
+       * Create falling petals
+       * continuously.
+       */
+
+      setInterval(createPetal, 2500);
+    </script>
+  </body>
+</html>
